@@ -22,5 +22,16 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        launchFirstCoroutine(5000)
+        launchFirstCoroutine(1000)
+        launchFirstCoroutine(2000)
+
+        asyncCoroutine()
+
+        val deferredResult = callSuspendFunctionAsync()
+//        val result = deferredResult.getCompleted()
+
+        postItem("item1")
     }
 }
