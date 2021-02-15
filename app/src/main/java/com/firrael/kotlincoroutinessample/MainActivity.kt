@@ -7,6 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,8 +32,16 @@ class MainActivity : AppCompatActivity() {
         asyncCoroutine()
 
         val deferredResult = callSuspendFunctionAsync()
-//        val result = deferredResult.getCompleted()
+        runBlocking {
+            val result = deferredResult.await()
+            println("runBlocking deferred result: $result")
+        }
 
         postItem("item1")
+
+        runBlocking {
+            val result = async { jobExample() }
+            println("runBlocking job result: $result")
+        }
     }
 }

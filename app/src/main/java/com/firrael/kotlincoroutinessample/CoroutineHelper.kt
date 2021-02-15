@@ -14,7 +14,8 @@ fun launchFirstCoroutine(delayMs: Long) {
 fun asyncCoroutine() {
     println("start asyncCoroutine")
 
-    val deferred = (1..1_000_000).map { n ->
+//    val deferred = (1..1_000_000).map { n ->
+    val deferred = (1..100).map { n ->
         GlobalScope.async {
             n
         }
@@ -52,6 +53,20 @@ suspend fun preparePost(): String {
     // makes a request and suspends the coroutine
     return suspendCoroutine { /* ... */ }
 }
+
+// Job
+
+fun jobExample(): Job {
+    val scope = CoroutineScope(Job())
+
+    val job = scope.launch {
+        println("jobTest")
+    }
+
+    return job
+}
+
+
 
 
 
